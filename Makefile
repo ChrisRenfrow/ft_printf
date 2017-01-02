@@ -3,29 +3,30 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: crenfrow <crenfrow@student.42.us.org>      +#+  +:+       +#+         #
+#    By: crenfrow <crenfrow@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2016/11/12 22:12:44 by crenfrow          #+#    #+#              #
-#    Updated: 2016/11/12 23:48:56 by crenfrow         ###   ########.fr        #
+#    Created: 2017/01/02 00:34:03 by crenfrow          #+#    #+#              #
+#    Updated: 2017/01/02 00:34:16 by crenfrow         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= libftprintf.a
 
-FILENAMES	= ft_printf
+FILENAMES	= ft_printf ft_vasprintf
 CFILES		= $(addsuffix .c, $(FILENAMES))
 SOURCES		= $(addprefix src/, $(CFILES))
 BUILD		= $(addprefix build/, $(CFILES.c=.o))
-CC			= clang
+INCDIR		= -I includes/ -I libft/includes/
 FLAGS		= -Wall -Wextra -Werror
+CC			= clang
 
 all: $(NAME)
 
 $(NAME): $(SOURCES) | $(BUILD)
 	ar rcs $@ $(BUILD)
 
-build/%.o: sources/%.c | build
-	$(CC) $(FLAGS) -I includes/ -c $^ -o $@
+build/%.o: src/%.c | build
+	$(CC) $(FLAGS) $(INCDIR) -c $^ -o $@
 
 clean:
 	rm -rf build/

@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 23:59:25 by crenfrow          #+#    #+#             */
-/*   Updated: 2016/12/27 21:50:11 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/01/01 22:19:48 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 **	write, malloc, free, exit, va_start, va_arg, va_copy, va_end
 */
 
-int printf(const char *format, ...);
+int 		ft_printf(const char *format, ...);
+ssize_t		ft_vasprintf(char **ret, const char *format, va_list ap);
 
 #endif

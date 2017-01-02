@@ -174,3 +174,21 @@ Applicable to: `d`, `i`, `n`, `o`, `u`, `x`, or `X` conversion.
 
 ####Note:
 In no case does a non-existent or small field width cause truncation of a numeric field; if the result of a conversion is wider than the field width, the field is expanded to contain the conversion result.
+
+***
+
+###Additional Notes:
+Basically just scribbles.
+
+######Anatomy of Format String
+`"Example Start: %[type flags][modifiers]\n"`
+
+######Anatomy of Implementation A
+- **Storage Phase:**
+    >store each substitution as a struct which will represent what flags the substitution contains. Any obvious errors are dealt with here
+- **Validation and Conversion Phase:**
+    >More specific flag conflicts are found and dealt with here. Argument references are stored in each substitution struct. Each argument is taken in, converted as per it's respective flags and modifiers, and stored in the substitution struct. Finally, the size of the result is calculated and stored in the struct.
+- **Rendering Phase:**
+    >A new string is allocated using the size of the format string minus the flags and the sum of all the substitution results. This string then has the value of the format string copied, substituting each flag for it's respective converted value. The result is then sent to stdout.
+
+Finding flags -

@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_vasprintf.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crenfrow <crenfrow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/12 23:50:25 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/01/01 22:51:27 by crenfrow         ###   ########.fr       */
+/*   Created: 2017/01/01 21:46:09 by crenfrow          #+#    #+#             */
+/*   Updated: 2017/01/02 00:24:28 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
+#include "libft.h"
 
-/*
-** Returns the number of characters printed.
-*/
+//static char args[] = "sSpdDioOuUxXcC\0";
 
-int		ft_printf(const char *fmt, ...)
+ssize_t		ft_vasprintf(char **ret, const char *format, va_list ap)
 {
-	va_list ap;
-	ssize_t ret;
-	char *str;
+	/*
+	** Handles the actual variatic element of printf
+	*/
 
-	ret = 0;
-	va_start(ap, fmt);
-	ret = ft_vasprintf(&str, fmt, ap);
-	va_end(ap);
-	return (ret);
+	while (*format)
+	{
+		format++;
+		if (*format == 's')
+		{
+			*ret = va_arg(ap, char*);
+			printf("%s\n", *ret);
+		}
+	}
+	return ((ssize_t)ft_strlen(*ret));
 }
