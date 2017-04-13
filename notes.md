@@ -33,7 +33,7 @@ Clean up all memory usage and return number of characters printed, excluding ter
 - t_flag(?)
     - `char *flag`
         - a copy of the flag value
-    - `void *actl`
+    - `void *actl
         - a pointer to the represented value
     - `char *val`
         - the printable and converted value
@@ -100,7 +100,7 @@ Clean up all memory usage and return number of characters printed, excluding ter
 ######Length Modifiers:
 Applicable to: `d`, `i`, `n`, `o`, `u`, `x`, or `X` conversion.
 
-*Flag*
+*Modifier*
 - `hh`
     - `d`, `i`
         - signed char
@@ -191,4 +191,62 @@ Basically just scribbles.
 - **Rendering Phase:**
     >A new string is allocated using the size of the format string minus the flags and the sum of all the substitution results. This string then has the value of the format string copied, substituting each flag for it's respective converted value. The result is then sent to stdout.
 
-Finding flags -
+#####Printf family:
+```c
+#include <stdio.h>
+
+int printf(const char * restrict format, ...);
+// Your standard printf
+
+int fprintf(FILE * restrict stream, const char * restrict format, ...);
+// Write output to given output stream
+
+int sprintf(char * restrict str, const char * restrict format, ...);
+// Write to the character string str
+
+int snprintf(char * restrict str, size_t size, const char * restrict format, ...);
+// Write to the character string str
+
+int asprintf(char **ret, const char *format, ...);
+// Dynamically allocate a new string with malloc(3)
+// Set *ret == pointer to a sufficiently large buffer (to hold entire \
+    formatted string)
+
+int dprintf(int fd, const char * restrict format, ...);
+// Write output to the given file descriptor
+
+#include <stdarg.h>
+
+int vprintf(const char * restrict format, va_list ap);
+
+int vfprintf(FILE * restrict stream, const char * restrict format, va_list ap);
+// Write output to given output stream
+
+int vsprintf(char * restrict str, const char * restrict format, va_list ap);
+// Write to the character string str
+
+int vsnprintf(char * restrict str, size_t size, const char * restrict format, va_list ap);
+// Write to the character string str
+
+int vasprintf(char **ret, const char *format, va_list ap);
+// Dynamically allocate a new string with malloc(3)
+// Set *ret == pointer to a sufficiently large buffer (to hold entire \
+    formatted string)
+
+int vdprintf(int fd, const char * restrict format, va_list ap);
+// Write output to the given file descriptor
+```
+
+######ft_printf cycle:
+1. ft_printf
+    - takes in fmt and variadic args
+    - declares variables
+    - basic error checking
+2. ft_vasprintf
+    - takes in a pointer to the buffer string, the format string, and a va_list of additional args
+    - parses through format string and argument list, calculating size as it goes
+        - all conversions are carried out during this stage
+    - allocates proper size to *ret and then copies the rendered string to *ret
+    - the printable character size is returned up the stack
+3. ft_printf
+    - *ret is written to stdout

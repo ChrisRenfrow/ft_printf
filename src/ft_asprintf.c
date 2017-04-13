@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_asprintf.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/12 23:50:25 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/01/06 05:06:06 by crenfrow         ###   ########.fr       */
+/*   Created: 2017/01/06 03:56:46 by crenfrow          #+#    #+#             */
+/*   Updated: 2017/01/06 05:30:34 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 /*
-** Returns the number of characters printed.
+** ft_asprintf takes in a pointer to a buffer and allocates with malloc(3)
+** enough space to store the formatted string using format and any additional
+** args
 */
 
-int		ft_printf(const char *fmt, ...)
+int		ft_asprintf(char **ret, const char *fmt, ...)
 {
 	va_list ap;
 	int size;
-	char *ret;
 
 	size = 0;
 	va_start(ap, fmt);
-	size = ft_vasprintf(&ret, fmt, ap);
+	size = ft_vasprintf(ret, fmt, ap);
 	va_end(ap);
-	return (size);
+	return(size);
 }

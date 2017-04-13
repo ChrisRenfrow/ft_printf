@@ -3,40 +3,38 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: crenfrow <crenfrow@student.42.fr>          +#+  +:+       +#+         #
+#    By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/01/02 00:34:03 by crenfrow          #+#    #+#              #
-#    Updated: 2017/01/02 00:34:16 by crenfrow         ###   ########.fr        #
+#    Created: 2017/01/05 00:06:49 by crenfrow          #+#    #+#              #
+#    Updated: 2017/01/05 00:38:46 by crenfrow         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= libftprintf.a
 
-FILENAMES	= ft_printf ft_vasprintf
-CFILES		= $(addsuffix .c, $(FILENAMES))
-SOURCES		= $(addprefix src/, $(CFILES))
-BUILD		= $(addprefix build/, $(CFILES.c=.o))
-INCDIR		= -I includes/ -I libft/includes/
+FILENAMES 	= ft_printf ft_vasprintf
+BUILD		= $(addsuffix .o, $(addprefix build/, $(FILENAMES)))
+INCDIR		= -I includes/ -I libft/includes
 FLAGS		= -Wall -Wextra -Werror
 CC			= clang
 
+.PHONY: all
 all: $(NAME)
 
-$(NAME): $(SOURCES) | $(BUILD)
-	ar rcs $@ $(BUILD)
-
-build/%.o: src/%.c | build
-	$(CC) $(FLAGS) $(INCDIR) -c $^ -o $@
-
+.PHONY: clean
 clean:
 	rm -rf build/
 
+.PHONY: fclean
 fclean: clean
 	rm -rf $(NAME)
 
-re: fclean all
+.PHONY: re
+re: fclean $(NAME)
 
-build:
-	mkdir build/
+$(NAME): $(BUILD)
+	libtool -o $@ $<
 
-.PHONY: all clean fclean re
+build/%.o: src/%.c
+	@mkdir -p build/
+	$(CC) $(FLAGS) $(INCDIR) -c $^ -o $@
