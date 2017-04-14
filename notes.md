@@ -1,29 +1,29 @@
-###ft_printf Notes
+### ft_printf Notes
 
 - Part One: Gameplan, dried-up subject summary
 - Part Two: Dried-up `printf()` man page, omitting irrelevant data
 
 ***
 
-###Gameplan
+### Gameplan
 
 Prototype: `int ft_printf(const char *fmt, ...)`
 
-#####Proposed Step-by-step
+##### Proposed Step-by-step
 
-######Step One:
+###### Step One:
 Validate `const char *fmt` for proper formatting, storing flags in linked list on discovery and recording number of flags.
 
-######Step Two:
+###### Step Two:
 Step through list and compare each argument against it's respective flag and store value with corresponding flag, performing any necessary conversions at the same time. If mismatch, return `-1`. Else, continue to next argument.
 
-######Step Three:
+###### Step Three:
 When all assignments/conversions are complete, begin output process. Print out format string up until first flag, print saved value for each flag, skip past flag and continue printing.
 
-######Step Four:
+###### Step Four:
 Clean up all memory usage and return number of characters printed, excluding terminating `NUL`.
 
-######Structs:
+###### Structs:
 
 - t_list
     - `void *data`
@@ -40,9 +40,9 @@ Clean up all memory usage and return number of characters printed, excluding ter
 
 ***
 
-###Subject Summary
+### Subject Summary
 
-######Mandatory:
+###### Mandatory:
 - ft_printf will **not** manage the buffer
 - must manage these conversions: `sSpdDioOuUxXcC`
 - must manage `%%`
@@ -51,18 +51,18 @@ Clean up all memory usage and return number of characters printed, excluding ter
 - must manage precision
 - must manage flags `hh`, `h`, `l`, `ll`, `j`, and `z`
 
-######Interesting Bonuses:
+###### Interesting Bonuses:
 - Alter text color with special flags
 - `%b` to print in binary
 
 ***
 
-###Man Page Summary
+### Man Page Summary
 
 >For those routines that write to a user-provided character string, that string and the format strings
      should not overlap, as the behavior is undefined.
 
-######Anatomy of a Format String:
+###### Anatomy of a Format String:
 - >Normal characters, printed out without conversion or substitution.
 
 - >An optional field, consisting of a decimal digit string followed by a $, specifying the next argument to access.  If this field is not provided, the argument following the last argument accessed will be used.  Arguments are numbered starting at 1.  If un-accessed arguments in the format string are interspersed with ones that are accessed the results will be indeterminate.
@@ -77,9 +77,9 @@ Clean up all memory usage and return number of characters printed, excluding ter
 
 - >A character that specifies the type of conversion to be applied.
 
-####Flag Index:
+#### Flag Index:
 
-######Standard:
+###### Standard:
 *Flag*
 
 - `#`
@@ -97,7 +97,7 @@ Clean up all memory usage and return number of characters printed, excluding ter
 - `+`
     - >A sign must always be placed before a number produced by a signed conversion, A `+` overrides  ` `  (space) if both are used.
 
-######Length Modifiers:
+###### Length Modifiers:
 Applicable to: `d`, `i`, `n`, `o`, `u`, `x`, or `X` conversion.
 
 *Modifier*
@@ -144,7 +144,7 @@ Applicable to: `d`, `i`, `n`, `o`, `u`, `x`, or `X` conversion.
     - `n`
         - indicates that the argument is of a signed type equivalent in size to a size_t
 
-####Conversion Index:
+#### Conversion Index:
 
 - `diouxX`
     - >The int (or appropriate variant) argument is converted to signed decimal (`d` and `i`), unsigned octal (`o`), unsigned decimal (`u`), or unsigned hexadecimal (`x` and `X`) notation.  The letters "abcdef" are used for `x` conversions; the letters "ABCDEF" are used for `X` conversions.  The precision, if any, gives the minimum number of digits that must appear; if the converted value requires fewer digits, it is padded on the left with zeros.
@@ -172,18 +172,18 @@ Applicable to: `d`, `i`, `n`, `o`, `u`, `x`, or `X` conversion.
 - `%`
     - >A `%` is written. No argument is converted. The complete conversion specification is `%%`.
 
-####Note:
+#### Note:
 In no case does a non-existent or small field width cause truncation of a numeric field; if the result of a conversion is wider than the field width, the field is expanded to contain the conversion result.
 
 ***
 
-###Additional Notes:
+### Additional Notes:
 Basically just scribbles.
 
-######Anatomy of Format String
+###### Anatomy of Format String
 `"Example Start: %[type flags][modifiers]\n"`
 
-######Anatomy of Implementation A
+###### Anatomy of Implementation A
 - **Storage Phase:**
     >store each substitution as a struct which will represent what flags the substitution contains. Any obvious errors are dealt with here
 - **Validation and Conversion Phase:**
@@ -191,7 +191,7 @@ Basically just scribbles.
 - **Rendering Phase:**
     >A new string is allocated using the size of the format string minus the flags and the sum of all the substitution results. This string then has the value of the format string copied, substituting each flag for it's respective converted value. The result is then sent to stdout.
 
-#####Printf family:
+##### Printf family:
 ```c
 #include <stdio.h>
 
@@ -237,7 +237,7 @@ int vdprintf(int fd, const char * restrict format, va_list ap);
 // Write output to the given file descriptor
 ```
 
-######ft_printf cycle:
+###### ft_printf cycle:
 1. ft_printf
     - takes in fmt and variadic args
     - declares variables
