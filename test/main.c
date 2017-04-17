@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 00:04:29 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/04/14 01:50:19 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/04/14 03:25:36 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,33 @@ int		main(int ac, char *av[])
 	printf("printf\n");
 	len = printf("Test: %hd -> %hd\n", min_hd, max_hd);
 	printf("Len: %d\n", len);
+
 	len = printf("Test: %d -> %d\n", min_d, max_d);
 	printf("Len: %d\n", len);
+	len = printf("Test: %d -> %d\n", min_d, max_d);
+	printf("Len: %d\n", len);
+
+	len = printf("Test: %x -> %x\n", (int)0, max_d);
+	printf("Len: %d\n", len);
+
 	len = printf("Test: 0 -> %hu\n", max_hu);
 	printf("Len: %d\n", len);
+
 	len = printf("Test: %ld -> %ld\n", min_ld, max_ld);
 	printf("Len: %d\n", len);
+
 	len = printf("Test: 0 -> %lu\n", max_lu);
 	printf("Len: %d\n", len);
+
 	len = printf("Test: %lld -> %lld\n", min_lld, max_lld);
 	printf("Len: %d\n", len);
+
 	len = printf("Test: %f -> %f\n", min_f, max_f);
 	printf("Len: %d\n", len);
+
 	len = printf("Test: %s -> %s\n", s_1, s_2);
 	printf("Len: %d\n", len);
+
 	printf("\n");
 
 	ft_printf("ft_printf\n");
