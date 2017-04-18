@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 23:59:25 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/04/13 16:52:32 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/04/17 22:23:29 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <limits.h>
 #include "libft.h"
 
 /*
@@ -42,5 +43,13 @@ union			u_arg
 };
 
 int 	ft_printf(const char *format, ...);
+
+char 	*fmt_s(va_list ap);
+char 	*fmt_c(va_list ap);
+char 	*fmt_d(va_list ap);
+char 	*fmt_o(va_list ap);
+char 	*fmt_p(va_list ap);
+char 	*fmt_u(va_list ap);
+char 	*fmt_x(va_list ap);
 
 #endif

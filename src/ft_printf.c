@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 23:50:25 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/04/14 01:54:03 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/04/17 18:49:24 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,16 @@ t_mod	init_modifiers(void)
 	return (mod);
 }
 
+int		print_using_fmt(char *(*func)(va_list), va_list ap)
+{
+	int len = 0;
+	char *out;
+	out = func(ap);
+	len = ft_strlen(out);
+	ft_putstr(out);
+	return (len);
+}
+
 int		format_handler(t_mod mods, const char **fmt, va_list ap)
 {
 	(void)mods;
@@ -39,13 +49,21 @@ int		format_handler(t_mod mods, const char **fmt, va_list ap)
 	len = 0;
 	(*fmt)++;
 	if (**fmt == 's') {
-		char *s = va_arg(ap, char *);
-		len = ft_strlen(s);
-		ft_putstr(s);
+		len = print_using_fmt(&fmt_s, ap);
+	} else if (**fmt == 'c') {
+		len = print_using_fmt(&fmt_c, ap);
 	} else if (**fmt == 'd') {
-		char *s = ft_itoa(va_arg(ap, int));
-		len = ft_strlen(s);
-		ft_putstr(s);
+		len = print_using_fmt(&fmt_d, ap);
+	} else if (**fmt == 'i') {
+		len = print_using_fmt(&fmt_d, ap);
+	} else if (**fmt == 'o') {
+		len = print_using_fmt(&fmt_o, ap);
+	} else if (**fmt == 'p') {
+		len = print_using_fmt(&fmt_p, ap);
+	} else if (**fmt == 'u') {
+		len = print_using_fmt(&fmt_u, ap);
+	} else if (**fmt == 'x') {
+		len = print_using_fmt(&fmt_x, ap);
 	} else if (**fmt == '%') {
 		ft_putchar('%');
 	}

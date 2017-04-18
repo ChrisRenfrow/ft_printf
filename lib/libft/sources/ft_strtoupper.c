@@ -1,45 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_strtoupper.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/26 17:25:32 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/04/17 20:14:17 by crenfrow         ###   ########.fr       */
+/*   Created: 2017/04/17 22:30:01 by crenfrow          #+#    #+#             */
+/*   Updated: 2017/04/17 22:33:13 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-char	*ft_itoa(int nb)
+void 	ft_strtoupper(char *str)
 {
-	char *res;
-	int i;
-	int neg;
-	int rem;
-	unsigned int n;
-
-	i = 0;
-	neg = 1;
-	if (!nb)
-		return (ft_strdup("0"));
-	if (nb < 0)
+	while (*str)
 	{
-		nb = -nb;
-		neg = -1;
+		*str = ft_toupper(*str);
+		str++;
 	}
-	n = nb;
-	if (!(res = ft_strnew(ft_digilen(n))))
-		return (NULL);
-	while (n)
-	{
-		rem = n % 10;
-		res[i++] = rem + '0';
-		n /= 10;
-	}
-	if (neg == -1)
-		res[i] = '-';
-	return (ft_strrev(res));
 }

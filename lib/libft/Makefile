@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: crenfrow <crenfrow@student.42.fr>          +#+  +:+       +#+         #
+#    By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/21 14:49:42 by crenfrow          #+#    #+#              #
-#    Updated: 2017/01/02 00:06:04 by crenfrow         ###   ########.fr        #
+#    Updated: 2017/04/17 22:34:27 by crenfrow         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,6 +88,9 @@ FILENAMES	+=	ft_lstnew		\
 				ft_lstadd		\
 				ft_lstiter		\
 				ft_lstmap		\
+				ft_itoa_base	\
+				ft_strtoupper	\
+				ft_strtolower	\
 
 CFILES 		= $(addsuffix .c, $(FILENAMES))
 SOURCES		= $(addprefix sources/, $(CFILES))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crenfrow <crenfrow@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 15:32:53 by crenfrow          #+#    #+#             */
-/*   Updated: 2016/12/17 22:41:40 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/04/17 22:34:04 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,8 @@ void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
+char				*ft_itoa_base(int n, int base);
+void 				ft_strtoupper(char *str);
+void 				ft_strtolower(char *str);
 
 #endif
