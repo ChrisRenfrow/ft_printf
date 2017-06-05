@@ -6,7 +6,7 @@
 #    By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/05 00:06:49 by crenfrow          #+#    #+#              #
-#    Updated: 2017/04/18 19:03:50 by crenfrow         ###   ########.fr        #
+#    Updated: 2017/06/05 14:51:27 by crenfrow         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SOURCES		= $(addprefix src/, $(CFILES))
 BUILD 		= $(addprefix build/, $(CFILES:.c=.o))
 INCDIR		= -I inc/ -I lib/libft/includes
 FLAGS		= -Wall -Wextra -Werror
-CC			= clang
+CC			= gcc
 
 .PHONY: all
 all: $(NAME)
