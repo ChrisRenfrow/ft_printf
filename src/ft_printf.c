@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 23:50:25 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/04/17 18:49:24 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/06/05 14:17:04 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,39 +31,59 @@ t_mod	init_modifiers(void)
 	return (mod);
 }
 
-int		print_using_fmt(char *(*func)(va_list), va_list ap)
+int		print_with_fmt(char *(*func)(va_list, t_mod), t_mod mods, va_list ap)
 {
 	int len = 0;
 	char *out;
-	out = func(ap);
+	out = func(ap, mods);
 	len = ft_strlen(out);
 	ft_putstr(out);
 	return (len);
 }
 
-int		format_handler(t_mod mods, const char **fmt, va_list ap)
+t_mod 	len_handler(const char *fmt)
 {
-	(void)mods;
+	t_mod mod = init_modifiers();
+	while (*fmt == 'h' || *fmt == 'l' || *fmt == 'j' || *fmt == 'z') {
+		if (*fmt == 'h') {
+			if (mod.h)
+				mod.hh = 1;
+		} else if (*fmt == 'l') {
+			if (mod.ll)
+				mod.ll = 1;
+		} else if (*fmt == 'j') {
+			mod.j = 1;
+		} else if (*fmt == 'z') {
+			mod.z = 1;
+		}
+		fmt++;
+	}
+	return (mod);
+}
+
+int		format_handler(const char **fmt, va_list ap)
+{
 	int len;
 
 	len = 0;
 	(*fmt)++;
+	t_mod mods = len_handler(*fmt);
 	if (**fmt == 's') {
-		len = print_using_fmt(&fmt_s, ap);
+		len = print_with_fmt(&fmt_s, mods, ap);
 	} else if (**fmt == 'c') {
-		len = print_using_fmt(&fmt_c, ap);
+		len = print_with_fmt(&fmt_c, mods, ap);
 	} else if (**fmt == 'd') {
-		len = print_using_fmt(&fmt_d, ap);
+		len = print_with_fmt(&fmt_d, mods, ap);
 	} else if (**fmt == 'i') {
-		len = print_using_fmt(&fmt_d, ap);
+		len = print_with_fmt(&fmt_d, mods, ap);
 	} else if (**fmt == 'o') {
-		len = print_using_fmt(&fmt_o, ap);
+		len = print_with_fmt(&fmt_o, mods, ap);
 	} else if (**fmt == 'p') {
-		len = print_using_fmt(&fmt_p, ap);
+		len = print_with_fmt(&fmt_p, mods, ap);
 	} else if (**fmt == 'u') {
-		len = print_using_fmt(&fmt_u, ap);
+		len = print_with_fmt(&fmt_u, mods, ap);
 	} else if (**fmt == 'x') {
-		len = print_using_fmt(&fmt_x, ap);
+		len = print_with_fmt(&fmt_x, mods, ap);
 	} else if (**fmt == '%') {
 		ft_putchar('%');
 	}
@@ -77,13 +97,12 @@ int		ft_printf(const char *fmt, ...)
 	char *res;
 
 	len = 0;
-	t_mod mods = init_modifiers();
 	res = ft_strnew(ft_strlen(fmt));
 	va_start(ap, fmt);
 	while (*fmt)
 	{
 		if (*fmt == '%') {
-			len += format_handler(mods, &fmt, ap);
+			len += format_handler(&fmt, ap);
 		} else {
 			len++;
 			ft_putchar(*fmt);

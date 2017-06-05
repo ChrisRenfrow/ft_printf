@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 23:59:25 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/04/17 22:23:29 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/04/18 18:21:59 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,14 @@ typedef struct	s_mod
 	int			none;
 }				t_mod;
 
-union			u_arg
-{
-				char 	*s;
-				char 	c;
-				int		d;
-};
-
 int 	ft_printf(const char *format, ...);
 
-char 	*fmt_s(va_list ap);
-char 	*fmt_c(va_list ap);
-char 	*fmt_d(va_list ap);
-char 	*fmt_o(va_list ap);
-char 	*fmt_p(va_list ap);
-char 	*fmt_u(va_list ap);
-char 	*fmt_x(va_list ap);
+char 	*fmt_s(va_list ap, t_mod mods);
+char 	*fmt_c(va_list ap, t_mod mods);
+char 	*fmt_d(va_list ap, t_mod mods);
+char 	*fmt_o(va_list ap, t_mod mods);
+char 	*fmt_p(va_list ap, t_mod mods);
+char 	*fmt_u(va_list ap, t_mod mods);
+char 	*fmt_x(va_list ap, t_mod mods);
 
 #endif
